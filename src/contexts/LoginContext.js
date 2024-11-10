@@ -1,5 +1,5 @@
 // src/contexts/LoginContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 // Create a Context for Login
@@ -9,7 +9,14 @@ export const useLogin = () => useContext(LoginContext);
 
 const LoginProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Track logged-in user
+  const [cartitem, setCartItem] = useState([]); // Track cart items
 
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCartItem(JSON.parse(savedCart)); // Load the cart from localStorage if available
+    }
+  }, []);
   const login = async (username, password) => {
     try {
       // Fetch users from the API
@@ -23,6 +30,11 @@ const LoginProvider = ({ children }) => {
 
       if (foundUser) {
         setUser(foundUser); // Set user in context if credentials match
+        const storedCart = localStorage.getItem('cart');
+        if (storedCart) {
+          setCartItem(JSON.parse(storedCart)); // Set the cart from localStorage
+        }
+
         return true;
       } else {
         alert("username or password not found")
@@ -46,7 +58,7 @@ const LoginProvider = ({ children }) => {
         confirmButtonText: "Logout !"
       }).then((result) => {
         if (result.isConfirmed) {
-            setUser(null); 
+            setUser([]); 
           Swal.fire({
             title: "Logout!",
             text: "",
@@ -57,7 +69,7 @@ const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={{ user, login, logout }}>
+    <LoginContext.Provider value={{ user,setUser, login, logout,cartitem,setCartItem }}>
       {children}
     </LoginContext.Provider>
   );

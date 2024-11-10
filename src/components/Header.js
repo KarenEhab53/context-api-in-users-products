@@ -16,7 +16,6 @@ const Header = () => {
 
   const handleLogout = () => {
     logout(); 
-  clearCart();
   
     };
  

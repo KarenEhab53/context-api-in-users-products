@@ -8,10 +8,12 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Regiter from './pages/Regiter';
 import LoginProvider from './contexts/LoginContext';
+import CartProvider from './contexts/CartContext';
 const App = () => {
   return <div className='overflow-hidden'>
     <BrowserRouter>
     <LoginProvider>
+      <CartProvider>
     <Header/>
       <Routes>
      <Route path='/' element={<Home/>}/>
@@ -21,6 +23,7 @@ const App = () => {
       </Routes>
       <Sidebar/>
       <Footer/>
+      </CartProvider>
       </LoginProvider>
     </BrowserRouter>
   </div>;
