@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { SidebarContext } from '../contexts/SidebarContext';
 import { BsBag } from 'react-icons/bs';
 import { CartContext } from '../contexts/CartContext';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../img/logo.svg'
 import { IoMdLogIn } from 'react-icons/io';
 import { FaSignInAlt } from 'react-icons/fa';
@@ -10,7 +10,7 @@ import { LoginContext } from '../contexts/LoginContext';
 const Header = () => {
   const [isActive, setIsActive] = useState(false)
   const { isOpen, setIsOpen } = useContext(SidebarContext)
-  const { itemAmount,clearCart } = useContext(CartContext);
+  const { itemAmount } = useContext(CartContext);
   const{user , logout }=useContext(LoginContext);
 
 
