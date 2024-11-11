@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import { BsEye, BsPlus } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
@@ -6,6 +6,7 @@ import { LoginContext } from '../contexts/LoginContext';
 
 const Product = ({ product }) => {
   // console.log(product);
+
   const { user } = useContext(LoginContext)
   const { id, image, title, price, category } = product;
   const { addToCart } = useContext(CartContext);

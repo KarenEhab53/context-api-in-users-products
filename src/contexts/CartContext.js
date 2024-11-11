@@ -12,26 +12,23 @@ const CartProvider = ({ children }) => {
 
 
   
-  // Load cart from localStorage when the user logs in
   useEffect(() => {
     if (user && user.id) {
       const storedCart = localStorage.getItem(`cart_${user.id}`);
       if (storedCart) {
         const parsedCart = JSON.parse(storedCart);
-        setCart(parsedCart);  // Restore the cart to state
+        setCart(parsedCart);  
       }
     } else {
-      setCart([]);  // Optionally clear the cart if the user logs out
+      setCart([]);  
     }
-  }, [user]);  // Re-run this effect when the `user` object changes
+  }, [user]);  
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (user && user.id) {
       localStorage.setItem(`cart_${user.id}`, JSON.stringify(cart));  // Save cart to localStorage
     }
-  }, [cart, user]);  // Re-run this effect when `cart` or `user` changes
-
+  }, [cart, user]);  
 
 
   useEffect(()=>{
@@ -49,10 +46,8 @@ const CartProvider = ({ children }) => {
     }
   }, [cart])
   const addToCart = (product, id) => {
-    // console.log(product);
     const newItem = { ...product, amount: 1 };
 
-    // console.log(newItem);
     const cartItem = cart.find(item => {
       return item.id === id;
     })
